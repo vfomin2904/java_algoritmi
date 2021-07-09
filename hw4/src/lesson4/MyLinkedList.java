@@ -10,18 +10,32 @@ public class MyLinkedList<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new Iter();
     }
 
     private class Iter implements Iterator<E>{
+
+        private int position;
+        private Node currentNode;
+
+        Iter(){
+            currentNode = first;
+        }
+
         @Override
         public boolean hasNext() {
-            return false;
+            return position < size;
         }
 
         @Override
         public E next() {
-            return null;
+            position++;
+            if(currentNode == null){
+                throw new NoSuchElementException();
+            }
+            E value = currentNode.getValue();
+            currentNode = currentNode.getNext();
+            return value;
         }
     }
 
